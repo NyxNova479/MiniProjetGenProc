@@ -22,7 +22,27 @@ public class Chemin : MonoBehaviour
         }
     }
 
-    
+
+    public void OuvrirNord()
+    {
+        murs[0].GetComponent<Walls>().Open();
+    }
+
+    public void OuvrirSud()
+    {
+        murs[1].GetComponent<Walls>().Open();
+    }
+
+    public void OuvrirEst()
+    {
+        murs[2].GetComponent<Walls>().Open();
+    }
+
+    public void OuvrirOuest()
+    {
+        murs[3].GetComponent<Walls>().Open();
+    }
+
     //Réactive les collider et mesh renderer de tous les murs
     public void FermerTousLesMurs()
     {

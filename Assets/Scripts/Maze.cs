@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Maze : MonoBehaviour
@@ -6,16 +7,23 @@ public class Maze : MonoBehaviour
     GameObject[,] cases;
     [SerializeField]
     GameObject casePrefab;
+    [SerializeField]
     GameObject portePrefab;
+    [SerializeField]
+    GameObject joueur;
+
 
     // Il me faut au démarrage une génération aléatoire d'un labyrinthe et d'un trésor
-    // Labyrinthe = Des cases avec des ouvertures orientées de façon à créer des chemins
+    // 1) Générations des cases  aléatoirement
+    // 2) Placer le trésor aléatoirement dans le labyrinthe
+
+
 
 
 
     void Start()
     {
-        // 1) Générations des cases
+        
         
         cases = new GameObject[100, 100];
 
@@ -23,27 +31,11 @@ public class Maze : MonoBehaviour
         {
             for (int i = 0; i < 100; i++)
             {
-                int randRota = Random.Range(0, 4);
-                if (randRota == 0)
-                {
-                    cases[n, i] = Instantiate(casePrefab, new Vector3(n * 2f, 0, i*3f), new Quaternion(0f, 0f, 0f, 0f));
 
-                }
-                if (randRota == 1)
-                {
-                    cases[n, i] = Instantiate(casePrefab, new Vector3(n * 2f, 0, i * 3f), new Quaternion(0f, 90f, 0f, 0f));
-                }
-                if (randRota == 2)
-                {
-                    cases[n, i] = Instantiate(casePrefab, new Vector3(n * 2f, 0, i * 3f), new Quaternion(0f, -90f, 0f, 0f));
-                }
-                if (randRota == 3)
-                {
-                    cases[n, i] = Instantiate(casePrefab, new Vector3(n *2f, 0, i * 3f), new Quaternion(0f, 180f, 0f, 0f));
-                }
-                cases[n, i].transform.localScale = new Vector3(2f, 7, 3f);
-                
-                
+
+                cases[n, i] = Instantiate(casePrefab, new Vector3(n * 2f, 0, i * 3f), Quaternion.identity);
+
+
             }
 
         }
@@ -54,16 +46,76 @@ public class Maze : MonoBehaviour
 
     }
 
-    int indexDeLaCaseCourante = 0;
+    int ligneCourante = joueur.transform.position.x;
+    int colonneCourante = joueur.transform.position.x;
 
-
+    IEnumerator OuvreToiSesame()
+    {
+        yield return new WaitForSeconds(3f);
+        cases[ligneCourante, colonneCourante].GetComponent<Chemin>().FermerTousLesMurs();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (indexDeLaCaseCourante >= 1000) return;
-        cases[indexDeLaCaseCourante, 0] = Instantiate(portePrefab, new Vector3 ())
-        cases[indexDeLaCaseCourante + 1, 0].GetComponent<Case>().OuvrirOuest();
-        indexDeLaCaseCourante++;
+        // Je veux qu'à l'appuie sur O, 2 portes apparaissent sur 2 des murs de la case où se trouve le joueur puis se referme après un instant
+
+        // 1) Il faut ouvrir les 2 Murs aléatoirement selon la case où est le joueur
+        // 2) Remplacer les Murs par des portes 
+        // 3) Attendre un temps puis faire la manoeuvre inverse
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                int randWall = Random.Range(0, 4);
+                if (ligneCourante == 0)
+                {
+                    randWall = Random.Range(0, 3);
+                }
+                if (colonneCourante == 0)
+                {
+                    randWall = Random.Range(1, 4);
+                }
+                if (ligneCourante == 0 && colonneCourante == 0)
+                {
+                    randWall = Random.Range(1, 3);
+                }
+
+                if (randWall == 0)
+                {
+
+                    cases[ligneCourante, colonneCourante].GetComponent<Chemin>().OuvrirSud();
+                    cases[colonneCourante, colonneCourante - 1].GetComponent<Chemin>().OuvrirSud();
+                }
+
+
+                if (randWall == 1)
+                {
+
+                    cases[ligneCourante, colonneCourante].GetComponent<Chemin>().OuvrirEst();
+                    cases[ligneCourante + 1, colonneCourante].GetComponent<Chemin>().OuvrirEst();
+                }
+
+                if (randWall == 2)
+                {
+                    cases[ligneCourante, colonneCourante].GetComponent<Chemin>().OuvrirNord();
+                    cases[ligneCourante, colonneCourante + 1].GetComponent<Chemin>().OuvrirNord();
+                }
+
+                if (randWall == 3)
+                {
+
+                    cases[ligneCourante, ligneCourante].GetComponent<Chemin>().OuvrirOuest();
+                    cases[ligneCourante - 1, colonneCourante].GetComponent<Chemin>().OuvrirOuest();
+                }
+            }
+            
+            StartCoroutine(OuvreToiSesame());
+
+                ligneCourante++;
+                colonneCourante++;
+            
+        }
+        
 
     }
 
