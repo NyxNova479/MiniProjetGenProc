@@ -7,6 +7,11 @@ public class Maze : MonoBehaviour
     [SerializeField]
     GameObject casePrefab;
     
+    // Il me faut au démarrage une génération aléatoire d'un labyrinthe:
+    // Des cases avec des ouvertures orientées de façon à créer des chemins
+    // 1) Générations des cases
+
+
     void Start()
     {
         int scale = 2;
@@ -29,47 +34,39 @@ public class Maze : MonoBehaviour
 
     }
 
-    int indexDeLaCaseCourante = 0;
+    
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
 
-
-            if (indexDeLaCaseCourante >= 1000) return;
-            cases[indexDeLaCaseCourante, 0].GetComponent<Case>().OuvrirEst();
-            cases[indexDeLaCaseCourante + 1, 0].GetComponent<Case>().OuvrirOuest();
-            indexDeLaCaseCourante++;
-
-
-
-
-
-        }
     }
 
+
+    // Je veux au démarrage que les murs clignotes 5 fois pour laisser entrevoir la position du trésor
+    // 1) Désactiver les murs un instant 
+    // 2) Réactiver les murs 
+    // 3) Recommencer l'itération
     IEnumerator Clignotage()
     {
-        yield return new WaitForSeconds(2f);
-        for (int n = 0; n < 5; n++)
+        yield return new WaitForSeconds(0.5f);
+        for (int n = 0; n < 3; n++)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.45f);
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
                 {
-                    cases[i, j].GetComponent<Case>().OuvrirTousLesMurs();
+                    cases[i, j].GetComponent<Chemin>().OuvrirTousLesMurs();
                 }
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.45f);
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
                 {
-                    cases[i, j].GetComponent<Case>().FermerTousLesMurs();
+                    cases[i, j].GetComponent<Chemin>().FermerTousLesMurs();
                 }
 
             }

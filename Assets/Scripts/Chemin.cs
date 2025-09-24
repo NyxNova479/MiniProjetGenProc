@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Path : MonoBehaviour
+public class Chemin : MonoBehaviour
 {
 
     [SerializeField]
@@ -12,39 +12,23 @@ public class Path : MonoBehaviour
         
     }
 
+
+    //Desactive les collider et mesh renderer de tous les murs
     public void OuvrirTousLesMurs()
     {
         for (int i = 0; i < murs.Length; i++)
         {
-            murs[i].GetComponent<Mur>().Ouvrir();
+            murs[i].GetComponent<Walls>().Open();
         }
     }
 
-    public void OuvrirNord()
-    {
-        murs[0].GetComponent<Mur>().Ouvrir();
-    }
-
-    public void OuvrirSud()
-    {
-        murs[1].GetComponent<Mur>().Ouvrir();
-    }
-
-    public void OuvrirEst()
-    {
-        murs[2].GetComponent<Mur>().Ouvrir();
-    }
-
-    public void OuvrirOuest()
-    {
-        murs[3].GetComponent<Mur>().Ouvrir();
-    }
-
+    
+    //Réactive les collider et mesh renderer de tous les murs
     public void FermerTousLesMurs()
     {
         for (int i = 0; i < murs.Length; i++)
         {
-            murs[i].GetComponent<Mur>().Fermer();
+            murs[i].GetComponent<Walls>().Close();
         }
     }
 

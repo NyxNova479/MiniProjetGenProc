@@ -1,23 +1,21 @@
 using UnityEngine;
 
-public class Murs : MonoBehaviour
+public class Walls : MonoBehaviour
 {
 
     [SerializeField]
     string nom;
 
-    public void Ouvrir()
+    public void Open()
     {
         gameObject.GetComponent<BoxCollider>().enabled = false;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
-
     }
 
-    public void Fermer()
+    public void Close()
     {
         gameObject.GetComponent<BoxCollider>().enabled = true;
         gameObject.GetComponent<MeshRenderer>().enabled = true;
-
     }
 
 
