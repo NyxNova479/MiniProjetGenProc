@@ -37,7 +37,7 @@ public class Maze : MonoBehaviour
             {
 
 
-                cases[n, i] = Instantiate(casePrefab, new Vector3(n *2, 0, i*2 ), Quaternion.identity);
+                cases[n, i] = Instantiate(casePrefab, new Vector3(n *5, 0, i*5 ), Quaternion.identity);
                 
             }
         }
@@ -83,7 +83,7 @@ public class Maze : MonoBehaviour
                 {
                     randWall = Random.Range(1, 3);
                 }
-                if (cases[ligneCourante, colonneCourante].GetComponent<Chemin>() == portePrefab)
+                if (cases[ligneCourante, colonneCourante] == portePrefab)
                 {
                     if (ligneCourante == 0)
                     {
@@ -95,7 +95,7 @@ public class Maze : MonoBehaviour
                     }
                     if (ligneCourante == 0 && colonneCourante == 0)
                     {
-                        randWall = Random.Range(1, 3);
+                        randWall = Random.Range(1, 2);
                     }
                 }
                 if (randWall == 0)
@@ -113,14 +113,14 @@ public class Maze : MonoBehaviour
                 {
 
                     cases[ligneCourante, colonneCourante].GetComponent<Chemin>().OuvrirEst();
-                    cases[ligneCourante, colonneCourante] = Instantiate(portePrefab, new Vector3(cases[ligneCourante, colonneCourante].transform.position.x, 0, cases[ligneCourante, colonneCourante].transform.position.z), Quaternion.identity);
+                    cases[ligneCourante, colonneCourante] = Instantiate(portePrefab, new Vector3(cases[ligneCourante, colonneCourante].transform.position.x*3, 0, cases[ligneCourante, colonneCourante].transform.position.z*3), Quaternion.identity);
                     cases[ligneCourante + 1, colonneCourante].GetComponent<Chemin>().OuvrirOuest();
                 }
 
                 if (randWall == 2)
                 {
                     cases[ligneCourante, colonneCourante].GetComponent<Chemin>().OuvrirNord();
-                    cases[ligneCourante, colonneCourante] = Instantiate(portePrefab, new Vector3(cases[ligneCourante, colonneCourante].transform.position.x, 0, cases[ligneCourante, colonneCourante].transform.position.z), Quaternion.identity);
+                    cases[ligneCourante, colonneCourante] = Instantiate(portePrefab, new Vector3(cases[ligneCourante, colonneCourante].transform.position.x*3, 0, cases[ligneCourante, colonneCourante].transform.position.z*3), Quaternion.identity);
                     cases[ligneCourante, colonneCourante + 1].GetComponent<Chemin>().OuvrirSud();
                 }
 
@@ -128,7 +128,7 @@ public class Maze : MonoBehaviour
                 {
 
                     cases[ligneCourante, ligneCourante].GetComponent<Chemin>().OuvrirOuest();
-                    cases[ligneCourante, colonneCourante] = Instantiate(portePrefab, new Vector3(cases[ligneCourante, colonneCourante].transform.position.x, 0, cases[ligneCourante, colonneCourante].transform.position.z), Quaternion.identity);
+                    cases[ligneCourante, colonneCourante] = Instantiate(portePrefab, new Vector3(cases[ligneCourante, colonneCourante].transform.position.x*3, 0, cases[ligneCourante, colonneCourante].transform.position.z*3), Quaternion.identity);
                     cases[ligneCourante - 1, colonneCourante].GetComponent<Chemin>().OuvrirEst();
                 }
             }
