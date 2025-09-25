@@ -9,9 +9,14 @@ public class Maze : MonoBehaviour
     [SerializeField]
     GameObject casePrefab;
     [SerializeField]
+    GameObject cagePrefab;
+    [SerializeField]
     GameObject portePrefab;
     [SerializeField]
     GameObject joueur;
+
+    
+    GameObject cage;
 
 
 
@@ -27,7 +32,7 @@ public class Maze : MonoBehaviour
 
     void Start()
     {
-        
+        cage = Instantiate(cagePrefab, Vector3.zero, Quaternion.identity);
         // 1) Générations des cases  aléatoirement
         cases = new GameObject[100, 100];
 
@@ -42,6 +47,7 @@ public class Maze : MonoBehaviour
             }
         }
         StartCoroutine(Clignotage());
+        StartCoroutine(Libère());
     }
 
     int indexLigneCourante = 0;
@@ -152,8 +158,8 @@ public class Maze : MonoBehaviour
 
     IEnumerator Clignotage()
     {
-        joueur.GetComponent<Rigidbody>().isKinematic = true;
-        yield return new WaitForSeconds(0.5f);
+        
+        yield return new WaitForSeconds(1);
         // 3) Recommencer l'itération
         for (int n = 0; n < 3; n++)
         {
@@ -177,7 +183,17 @@ public class Maze : MonoBehaviour
 
             }
         }
-        yield return new WaitForSeconds(0.5f);
-        joueur.GetComponent<Rigidbody>().isKinematic = false;
+
     }
+    // Au lancement j'aimerais que le player soit incapable de bouger pendant 3 seconds
+    // 1) Je créé une prefab cage constituée de collider
+    // 2) Je fais un ienumerator pour attendre 3 secondes avant de désactiver les colliders
+
+    IEnumerator Libère()
+    {
+        yield return new WaitForSeconds(4);
+        cage.GetComponent<Cage>().EnleverCage();
+    }
+
+
 }

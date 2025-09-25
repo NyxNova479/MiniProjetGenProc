@@ -6,6 +6,8 @@ public class Walls : MonoBehaviour
     [SerializeField]
     string nom;
 
+
+
     public void Open()
     {
         gameObject.GetComponent<BoxCollider>().enabled = true;
@@ -19,6 +21,8 @@ public class Walls : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().isTrigger = false;
         gameObject.GetComponent<MeshRenderer>().enabled = true;
     }
+
+    // Je veux pouvoir placer une porte à un endroit donné
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
