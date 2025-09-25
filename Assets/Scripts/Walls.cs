@@ -8,13 +8,15 @@ public class Walls : MonoBehaviour
 
     public void Open()
     {
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.GetComponent<BoxCollider>().isTrigger = true;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void Close()
     {
         gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.GetComponent<BoxCollider>().isTrigger = false;
         gameObject.GetComponent<MeshRenderer>().enabled = true;
     }
 

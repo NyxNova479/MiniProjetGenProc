@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 76209084018009018}
+  - component: {fileID: 5887131852955479258}
   m_Layer: 0
   m_Name: Porte
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7294091272403048087}
@@ -34,6 +35,22 @@ Transform:
   - {fileID: 3019153319419917766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5887131852955479258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3870127559463548381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a3232ba748c07449982568db4f9baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  murs:
+  - {fileID: 8354853208775841714}
+  - {fileID: 4770188494087882287}
+  - {fileID: 7256031654993783027}
 --- !u!1 &4770188494087882287
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,8 +63,9 @@ GameObject:
   - component: {fileID: 2009247835997951983}
   - component: {fileID: 2975837315143896241}
   - component: {fileID: 8622417992696075342}
+  - component: {fileID: 8470235078114779823}
   m_Layer: 0
-  m_Name: Porte (1)
+  m_Name: Gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,8 +80,8 @@ Transform:
   m_GameObject: {fileID: 4770188494087882287}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0.021, z: -1.139}
-  m_LocalScale: {x: 0.5, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0.021, z: -0.7}
+  m_LocalScale: {x: 0.5, y: 0.2, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 76209084018009018}
@@ -99,7 +117,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: deabc04f98af4364f8b2dabaf152f133, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,6 +160,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0, z: 1}
   m_Center: {x: 0, y: -0.5000055, z: -0}
+--- !u!114 &8470235078114779823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4770188494087882287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5907471c66ed24c8f5e7cf6d3f3b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nom: PorteGauche
 --- !u!1 &7256031654993783027
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,8 +185,9 @@ GameObject:
   - component: {fileID: 6262003540604600917}
   - component: {fileID: 8356703331178916827}
   - component: {fileID: 175449195663184751}
+  - component: {fileID: 5568976034553484555}
   m_Layer: 0
-  m_Name: Porte (2)
+  m_Name: Haut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,8 +202,8 @@ Transform:
   m_GameObject: {fileID: 7256031654993783027}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.122}
-  m_LocalScale: {x: 0.5, y: 0, z: 3}
+  m_LocalPosition: {x: -0, y: 1.79, z: -0.03}
+  m_LocalScale: {x: 0.5, y: 0.2, z: 2.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 76209084018009018}
@@ -207,7 +239,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: deabc04f98af4364f8b2dabaf152f133, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -250,6 +282,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0, z: 1}
   m_Center: {x: 0, y: -0.5000055, z: -0}
+--- !u!114 &5568976034553484555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256031654993783027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5907471c66ed24c8f5e7cf6d3f3b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nom: PorteHaut
 --- !u!1 &8354853208775841714
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,8 +307,9 @@ GameObject:
   - component: {fileID: 3673597819770264682}
   - component: {fileID: 5518821525476496644}
   - component: {fileID: 1670943628396626400}
+  - component: {fileID: 4146528717954905321}
   m_Layer: 0
-  m_Name: Porte
+  m_Name: Droite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -278,8 +324,8 @@ Transform:
   m_GameObject: {fileID: 8354853208775841714}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0.026, z: 1.369}
-  m_LocalScale: {x: 0.5, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0.026, z: 0.7}
+  m_LocalScale: {x: 0.5, y: 0.2, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 76209084018009018}
@@ -315,7 +361,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: deabc04f98af4364f8b2dabaf152f133, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -358,3 +404,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0, z: 1}
   m_Center: {x: 0, y: -0.5000055, z: -0}
+--- !u!114 &4146528717954905321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354853208775841714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5907471c66ed24c8f5e7cf6d3f3b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nom: PorteDroit
