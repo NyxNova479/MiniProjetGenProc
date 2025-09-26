@@ -57,18 +57,13 @@ public class Maze : MonoBehaviour
         int tresorRandX = Random.Range(30, 40);
         int tresorRandZ = Random.Range(30, 40);
 
-        int cligneRandX = Random.Range(50, 100);
-        int cligneRandZ = Random.Range(50, 100);
-
-        int tpRandX = Random.Range(30, 100);
-        int tpRandZ = Random.Range(30, 100);
         for (int i = 0; i < 100; i++)
         {
             for (int j = 0; j < 100; j++)
             {
 
 
-                cases[i, j] = Instantiate(casePrefab, new Vector3(i *5, 0, j*5 ), Quaternion.identity);
+                cases[i, j] = Instantiate(casePrefab, new Vector3(i * 5, 0, j * 5), Quaternion.identity);
                 // Génère des cases trésor pour qu'elles existent pour plus tard
                 caseTresor[i, j] = Instantiate(casetresorPrefab, new Vector3(i * 5, 500000000, j * 5), Quaternion.identity);
                 // Génère des cases clignotage pour qu'elles existent pour plus tard
@@ -77,21 +72,64 @@ public class Maze : MonoBehaviour
                 caseTP[i, j] = Instantiate(caseTPPrefab, new Vector3(i * 5, 5000000000000, j * 5), Quaternion.identity);
             }
         }
-        
 
+        // Génération aléatoires de 350 cases , elles seront des cases de clignotage
+        for (int x = 0; x < 350; x++)
+        {
+            int cligneRandX = Random.Range(30, 100);
+            int cligneRandZ = Random.Range(30, 100);
+            GénèreCaseCligne(cligneRandX, cligneRandZ);
+        }
+
+        // Génération aléatoire de 350 autres cases , elles seront des cases de téléporteuses
+        for (int x = 0; x < 350; x++)
+        {
+            int tpRandX = Random.Range(30, 100);
+            int tpRandZ = Random.Range(30, 100);
+            GénèreCaseCligne(tpRandX, tpRandZ);
+        }
 
         // 2) Désactiver une case aléatoirement, elle deviendra une case trésor
         cases[tresorRandX, tresorRandZ].GetComponent<Chemin>().OuvrirTousLesMurs();
         cases[tresorRandX, tresorRandZ].GetComponent<Chemin>().OuvrirSol();
         // 3) Instantier un trésor à cette emplacement dans la map
-        caseTresor[tresorRandX, tresorRandZ] = Instantiate(casetresorPrefab, new Vector3(tresorRandX * 5, 0, tresorRandZ * 5),Quaternion.identity);
+        caseTresor[tresorRandX, tresorRandZ] = Instantiate(casetresorPrefab, new Vector3(tresorRandX * 5, 0, tresorRandZ * 5), Quaternion.identity);
 
         // Lance le clignotage des cases
         StartCoroutine(Clignotage());
+
         // Libère le joueur de sa case
         StartCoroutine(Libère());
     }
 
+ 
+    
+
+    
+
+    private void GénèreCaseTP(int tpRandX, int tpRandZ)
+    {
+
+        cases[tpRandX,tpRandZ] = Instantiate(caseTPPrefab,new Vector3(tpRandX*5,0,tpRandZ*5),Quaternion.identity);
+     
+    }
+
+
+
+    private void GénèreCaseCligne(int cligneRandX, int cligneRandZ)
+    {
+        
+        cases[cligneRandX,cligneRandZ] = Instantiate(caseBlinkPrefab, new Vector3(cligneRandX * 5,0,cligneRandZ*5),Quaternion.identity);
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            StartCoroutine(Clignotage());
+        }
+    }
 
     //Permet de lancer la réapparition des murs après un certain temps donné
     IEnumerator FermeToiSesame()

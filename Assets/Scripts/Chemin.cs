@@ -75,6 +75,7 @@ public class Chemin : MonoBehaviour
         {
             Debug.Log("Tu as réussi");
         }
+
     }
 
 }

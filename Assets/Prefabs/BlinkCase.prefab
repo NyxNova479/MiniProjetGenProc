@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 2586695846967274185}
   - component: {fileID: 1735545796011584609}
   m_Layer: 0
-  m_Name: JumpCase
+  m_Name: BlinkCase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5907471c66ed24c8f5e7cf6d3f3b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nom: Ouest
+  nom: Est
 --- !u!1 &8708594332406645878
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 3351620088247719873}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: CaseCligne
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
