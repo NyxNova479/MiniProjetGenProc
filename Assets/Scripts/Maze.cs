@@ -6,10 +6,18 @@ using UnityEngine.UIElements;
 public class Maze : MonoBehaviour
 {
     GameObject[,] cases;
+
+    [SerializeField]
+    GameObject casetresorPrefab;
+
+    GameObject casetresor;
+
     [SerializeField]
     GameObject casePrefab;
     [SerializeField]
     GameObject cagePrefab;
+
+    GameObject[,] caseTresor;
 
     GameObject cage;
 
@@ -30,18 +38,30 @@ public class Maze : MonoBehaviour
         cage = Instantiate(cagePrefab, Vector3.zero, Quaternion.identity);
         // 1) Générations des cases  aléatoirement
         cases = new GameObject[100, 100];
-
-        for (int i = 0; i <= 100; i++)
+        caseTresor = new GameObject[100, 100];
+        //Créé les coordonnées en x et z de la case tresor
+        int tresorRandX = Random.Range(10, 100);
+        int tresorRandZ = Random.Range(10, 100);
+        for (int i = 0; i < 100; i++)
         {
-            for (int j = 0; j <= 100; j++)
+            for (int j = 0; j < 100; j++)
             {
 
 
                 cases[i, j] = Instantiate(casePrefab, new Vector3(i *5, 0, j*5 ), Quaternion.identity);
-                
+
             }
         }
+        
+        // 2) Désactiver une case aléatoirement, elle deviendra une case trésor
+        cases[tresorRandX, tresorRandZ].GetComponent<Chemin>().OuvrirTousLesMurs();
+        cases[tresorRandX, tresorRandZ].GetComponent<Chemin>().OuvrirSol();
+        // 3) Instantier un trésor à cette emplacement dans la map
+        caseTresor[tresorRandX, tresorRandZ] = Instantiate(casetresorPrefab, new Vector3(tresorRandX * 5, 0, tresorRandZ * 5),Quaternion.identity);
+
+        // Lance le clignotage des cases
         StartCoroutine(Clignotage());
+        // Libère le joueur de sa case
         StartCoroutine(Libère());
     }
 
@@ -66,7 +86,7 @@ public class Maze : MonoBehaviour
     }
 
     float tempsDerniereExecution = 0.0f;
-    float delai = 1f;
+    float delai = 2f;
 
 
     // Update is called once per frame
@@ -75,17 +95,17 @@ public class Maze : MonoBehaviour
         // Je veux qu'à chaque Frame  2 des murs de chaque case s'ouvrent puis se referme après un instant
 
        
-        {
+       // {
             // 1) Il faut ouvrir les 2 Murs aléatoirement sur chaque case
 
 
-            tempsDerniereExecution += Time.fixedDeltaTime;  // ajoute a chaque update le temps écoulé depuis le dernier Update		
-            if (tempsDerniereExecution > delai)
-            {
-                OpenPathRandom();
-                tempsDerniereExecution = 0;
-                StartCoroutine(FermeToiSesame());
-            }
+            //tempsDerniereExecution += Time.fixedDeltaTime;  // ajoute a chaque update le temps écoulé depuis le dernier Update		
+            //if (tempsDerniereExecution > delai)
+            //{
+              //  OpenPathRandom();
+                //tempsDerniereExecution = 0;
+                //StartCoroutine(FermeToiSesame());
+          //  }
 
 
             // 2) Attendre un temps puis faire la manoeuvre inverse
@@ -94,7 +114,7 @@ public class Maze : MonoBehaviour
             
 
             
-        }
+        //}
         
 
     }
@@ -103,14 +123,14 @@ public class Maze : MonoBehaviour
     
 
      private void OpenPathRandom()
-    {
-        for (int n = 0; n <= 1; n++)
+     {
+        for (int n = 0; n < 2; n++)
         {
 
-            for (int i = 0; i <= 100; i++)
+            for (int i = 0; i < 100; i++)
             {
 
-                for (int j = 0; j <= 100; j++)
+                for (int j = 0; j < 100; j++)
                 {
                     int randWall = Random.Range(0, 4);
                     if (randWall == 0)
@@ -144,7 +164,7 @@ public class Maze : MonoBehaviour
                 }
             }
         }
-    }   
+     }   
 
     
 
@@ -164,13 +184,14 @@ public class Maze : MonoBehaviour
         {
             // 1) Désactiver les murs un instant 
             yield return new WaitForSeconds(0.45f);
-            for (int i = 0; i <= 100; i++)
+            for (int i = 0; i < 100; i++)
             {
-                for (int j = 0; j <= 100; j++)
+                for (int j = 0; j < 100; j++)
                 {
                     cases[i, j].GetComponent<Chemin>().OuvrirTousLesMurs();
                 }
             }
+
             // 2) Réactiver les murs 
             yield return new WaitForSeconds(0.45f);
             for (int i = 0; i < 100; i++)

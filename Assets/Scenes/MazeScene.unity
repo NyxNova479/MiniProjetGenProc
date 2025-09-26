@@ -477,11 +477,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5393215578589016641, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   m_PrefabInstance: {fileID: 947547707}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &947547710 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-  m_PrefabInstance: {fileID: 947547707}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &979288017
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +523,7 @@ Terrain:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979288017}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: b38bafb687ad2104aaf3f50cb190fb81, type: 2}
   m_TreeDistance: 5000
@@ -588,10 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8beb2a09a0f229e43bca373e9275a7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  casetresorPrefab: {fileID: 6517873945404405748, guid: a99e4df1faa3b704f9ae1a0c2788ea10, type: 3}
   casePrefab: {fileID: 6517873945404405748, guid: ba4cee0e9c819c346b4ccdd977bccc9d, type: 3}
   cagePrefab: {fileID: 2292436746559144665, guid: 8a4f54ef5b7f0f548a9c39cdf03ceed2, type: 3}
-  portePrefab: {fileID: 3870127559463548381, guid: 038a0446f358b734391f1a1b72e3f584, type: 3}
-  joueur: {fileID: 947547710}
 --- !u!1001 &2009338859
 PrefabInstance:
   m_ObjectHideFlags: 0
