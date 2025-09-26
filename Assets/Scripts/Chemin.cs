@@ -20,7 +20,7 @@ public class Chemin : MonoBehaviour
     //Desactive les collider et mesh renderer de tous les murs
     public void OuvrirTousLesMurs()
     {
-        for (int i = 0; i < murs.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             murs[i].GetComponent<Walls>().Open();
         }
@@ -55,7 +55,7 @@ public class Chemin : MonoBehaviour
     //Réactive les collider et mesh renderer de tous les murs
     public void FermerTousLesMurs()
     {
-        for (int i = 0; i < murs.length; i++)
+        for (int i = 0; i < 4; i++)
         {
             murs[i].GetComponent<Walls>().Close();
         }
@@ -68,4 +68,13 @@ public class Chemin : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            Debug.Log("Tu as réussi");
+        }
+    }
+
 }

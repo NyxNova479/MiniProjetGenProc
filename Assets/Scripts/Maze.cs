@@ -10,23 +10,35 @@ public class Maze : MonoBehaviour
     [SerializeField]
     GameObject casetresorPrefab;
 
-    GameObject casetresor;
+    GameObject[,] caseTresor;
+
+    [SerializeField]
+    GameObject caseBlinkPrefab;
+
+    GameObject[,] caseBlink;
+
+    [SerializeField]
+    GameObject caseTPPrefab;
+
+    GameObject[,] caseTP;
+
+
 
     [SerializeField]
     GameObject casePrefab;
     [SerializeField]
     GameObject cagePrefab;
 
-    GameObject[,] caseTresor;
+    
 
     GameObject cage;
 
 
 
     // Il me faut au démarrage une génération aléatoire d'un trésor dans une zone remplie de case
+    // J'aimerais aussi que certaines cases aient des effets commes un clignotage ou un téléporteur
+    // Je veux que quand le joueur rentre: 1. dans une cases clignotage, cela lance le clignotage des case; 2. dans une case téléporteur il soit téléporter aléatoirement dans la map 
     
-    //2) Faire de certaines de ces cases des cases spéciales
-    // 3) Placer le trésor aléatoirement dans le labyrinthe
 
 
 
@@ -39,9 +51,17 @@ public class Maze : MonoBehaviour
         // 1) Générations des cases  aléatoirement
         cases = new GameObject[100, 100];
         caseTresor = new GameObject[100, 100];
-        //Créé les coordonnées en x et z de la case tresor
-        int tresorRandX = Random.Range(10, 100);
-        int tresorRandZ = Random.Range(10, 100);
+        caseBlink = new GameObject[100, 100];
+        caseTP = new GameObject[100, 100];
+        //Créé les coordonnées en x et z des cases spéciales
+        int tresorRandX = Random.Range(30, 40);
+        int tresorRandZ = Random.Range(30, 40);
+
+        int cligneRandX = Random.Range(50, 100);
+        int cligneRandZ = Random.Range(50, 100);
+
+        int tpRandX = Random.Range(30, 100);
+        int tpRandZ = Random.Range(30, 100);
         for (int i = 0; i < 100; i++)
         {
             for (int j = 0; j < 100; j++)
@@ -49,10 +69,17 @@ public class Maze : MonoBehaviour
 
 
                 cases[i, j] = Instantiate(casePrefab, new Vector3(i *5, 0, j*5 ), Quaternion.identity);
-
+                // Génère des cases trésor pour qu'elles existent pour plus tard
+                caseTresor[i, j] = Instantiate(casetresorPrefab, new Vector3(i * 5, 500000000, j * 5), Quaternion.identity);
+                // Génère des cases clignotage pour qu'elles existent pour plus tard
+                caseBlink[i, j] = Instantiate(caseBlinkPrefab, new Vector3(i * 5, 500000000000, j * 5), Quaternion.identity);
+                // Génère des cases tp pour qu'elles existent pour plus tard
+                caseTP[i, j] = Instantiate(caseTPPrefab, new Vector3(i * 5, 5000000000000, j * 5), Quaternion.identity);
             }
         }
         
+
+
         // 2) Désactiver une case aléatoirement, elle deviendra une case trésor
         cases[tresorRandX, tresorRandZ].GetComponent<Chemin>().OuvrirTousLesMurs();
         cases[tresorRandX, tresorRandZ].GetComponent<Chemin>().OuvrirSol();
@@ -69,7 +96,7 @@ public class Maze : MonoBehaviour
     //Permet de lancer la réapparition des murs après un certain temps donné
     IEnumerator FermeToiSesame()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         for (int i = 0; i < 100; i++)
         {
@@ -92,29 +119,26 @@ public class Maze : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Je veux qu'à chaque Frame  2 des murs de chaque case s'ouvrent puis se referme après un instant
+       // Je veux qu'à chaque Frame  2 des murs de chaque case s'ouvrent puis se referme après un instant
 
        
-       // {
-            // 1) Il faut ouvrir les 2 Murs aléatoirement sur chaque case
+        {
 
 
-            //tempsDerniereExecution += Time.fixedDeltaTime;  // ajoute a chaque update le temps écoulé depuis le dernier Update		
-            //if (tempsDerniereExecution > delai)
-            //{
-              //  OpenPathRandom();
-                //tempsDerniereExecution = 0;
-                //StartCoroutine(FermeToiSesame());
-          //  }
 
+            tempsDerniereExecution += Time.fixedDeltaTime;  // ajoute a chaque update le temps écoulé depuis le dernier Update		
+            if (tempsDerniereExecution > delai)
+            {
+                // 1) Il faut ouvrir les 2 Murs aléatoirement sur chaque case
+                OpenPathRandom();
+                tempsDerniereExecution = 0;
+                // 2) Attendre un temps puis faire la manoeuvre inverse
+                StartCoroutine(FermeToiSesame());
+            }
 
-            // 2) Attendre un temps puis faire la manoeuvre inverse
-            
-
-            
 
             
-        //}
+        }
         
 
     }
@@ -214,6 +238,7 @@ public class Maze : MonoBehaviour
         yield return new WaitForSeconds(4);
         cage.GetComponent<Cage>().EnleverCage();
     }
+
 
 
 }
