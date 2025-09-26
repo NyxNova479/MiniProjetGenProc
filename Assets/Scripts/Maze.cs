@@ -109,7 +109,8 @@ public class Maze : MonoBehaviour
 
     private void GénèreCaseTP(int tpRandX, int tpRandZ)
     {
-
+        cases[tpRandX, tpRandZ].GetComponent<Chemin>().OuvrirTousLesMurs();
+        cases[tpRandX, tpRandZ].GetComponent<Chemin>().OuvrirSol();
         cases[tpRandX,tpRandZ] = Instantiate(caseTPPrefab,new Vector3(tpRandX*5,0,tpRandZ*5),Quaternion.identity);
      
     }
@@ -118,7 +119,8 @@ public class Maze : MonoBehaviour
 
     private void GénèreCaseCligne(int cligneRandX, int cligneRandZ)
     {
-        
+        cases[cligneRandX, cligneRandZ].GetComponent<Chemin>().OuvrirTousLesMurs();
+        cases[cligneRandX, cligneRandZ].GetComponent<Chemin>().OuvrirSol();
         cases[cligneRandX,cligneRandZ] = Instantiate(caseBlinkPrefab, new Vector3(cligneRandX * 5,0,cligneRandZ*5),Quaternion.identity);
         
     }
@@ -200,6 +202,10 @@ public class Maze : MonoBehaviour
 
                         cases[i, j].GetComponent<Chemin>().OuvrirSud();
                         cases[i, j].GetComponent<Chemin>().OuvrirNord();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirSud();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirNord();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirSud();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirNord();
                     }
 
 
@@ -209,12 +215,20 @@ public class Maze : MonoBehaviour
 
                         cases[i, j].GetComponent<Chemin>().OuvrirEst();
                         cases[i, j].GetComponent<Chemin>().OuvrirOuest();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirEst();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirOuest();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirEst();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirOuest();
                     }
 
                     if (randWall == 2)
                     {
                         cases[i, j].GetComponent<Chemin>().OuvrirNord();
                         cases[i, j].GetComponent<Chemin>().OuvrirSud();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirNord();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirSud();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirNord();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirSud();
                     }
 
                     if (randWall == 3)
@@ -222,6 +236,10 @@ public class Maze : MonoBehaviour
 
                         cases[i, j].GetComponent<Chemin>().OuvrirOuest();
                         cases[i, j].GetComponent<Chemin>().OuvrirEst();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirOuest();
+                        caseBlink[i, j].GetComponent<Chemin>().OuvrirEst();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirOuest();
+                        caseTP[i, j].GetComponent<Chemin>().OuvrirEst();
                     }
                 }
             }
@@ -251,6 +269,8 @@ public class Maze : MonoBehaviour
                 for (int j = 0; j < 100; j++)
                 {
                     cases[i, j].GetComponent<Chemin>().OuvrirTousLesMurs();
+                    caseBlink[i, j].GetComponent<Chemin>().OuvrirTousLesMurs();
+                    caseTP[i, j].GetComponent<Chemin>().OuvrirTousLesMurs();
                 }
             }
 
@@ -261,6 +281,8 @@ public class Maze : MonoBehaviour
                 for (int j = 0; j < 100; j++)
                 {
                     cases[i, j].GetComponent<Chemin>().FermerTousLesMurs();
+                    caseBlink[i, j].GetComponent<Chemin>().FermerTousLesMurs();
+                    caseTP[i, j].GetComponent<Chemin>().FermerTousLesMurs();
                 }
 
             }
